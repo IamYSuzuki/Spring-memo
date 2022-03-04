@@ -1,0 +1,74 @@
+﻿body
+{
+}
+
+.setumei2{
+    /*padding: 8px 19px;
+    margin: 2em 0;
+    color: #2c2c2f;
+    
+    border-top: solid 5px #5989cf;
+    border-bottom: solid 5px #5989cf;
+    margin: 0; 
+    padding: 0;*/
+    padding: 0.3em 0.7em;
+    margin: 1em 0;
+    font-weight: bold;
+    color: #6091d3;/*文字色*/
+    background: #FFF;
+    border: solid 3px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+h3{
+    font-weight: bold;
+    color: #000099;/*文字色*/
+    background: #FFF;
+}
+
+#ketteifol2{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #D9E5FF;
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#ketteifol2:hover {
+  background: #8EB8FF;
+}
+
+#narabufile{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #EAD9FF;
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  margin: 2em;
+  font-weight: 500;
+}
+
+#narabufile:hover {
+  background: #C299FF;
+}
+
+#modorufol{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #ffd5ec;
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  margin: 0em;
+  font-weight: 500;
+}
+
+#modorufol:hover {
+  background: #ff97c2;
+}

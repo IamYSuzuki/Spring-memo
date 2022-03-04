@@ -1,0 +1,64 @@
+﻿body
+{
+ 
+}
+
+textarea{
+   width: 700px;
+   height: 400px;
+}
+
+h3{
+    font-weight: bold;
+    color: #000099;/*文字色*/
+    background: #FFF;
+}
+
+#save{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #E6FFE9;
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  margin: 0em;
+  font-weight: 500;
+}
+
+#save:hover {
+  background: #86F9C5;
+}
+ 
+/*#save:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}*/
+
+#load{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #F3FFD8;
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  margin: 0em;
+  font-weight: 500;
+}
+
+#modorufile{
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: #ffd5ec; FF97C2
+  color: #2c2c2f;
+  padding: 5px 14px;
+  font-size: 14px;
+  margin: 0em;
+  font-weight: 500;
+}
+
+#modorufile:hover {
+  background: #ff97c2;
+}

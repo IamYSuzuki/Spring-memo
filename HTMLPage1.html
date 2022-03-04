@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>春課題　メモ整理ソフト</title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    
+    
+</head>
+<body>
+ <div id="idid"></div>
+ <div id="idid2"></div>
+ <div id="box">
+  
+  <button id="save" type="button">テキストファイルを保存</button>
+  <input type="file" id="load" accept="text/*">
+  <input type="button" id="modorufile" onclick="idouList()" value="ファイル選択に戻る">
+  </br></br>
+ </div>
+ <div id="DateName"></div>
+
+  <script>
+  var name
+  var Year
+  var Month
+  var Date1
+  var Hour
+  var Min
+  var Sec
+
+ window.onload = function(){
+     idid.innerHTML = "<h3>"+sessionStorage.getItem(sessionStorage.getItem("idou2"))+"ファイル　メモ帳</h3>";
+     if(sessionStorage.getItem(sessionStorage.getItem("idou2")+"_memo") == undefined){ //最初空欄にしておく
+          sessionStorage.setItem(sessionStorage.getItem("idou2")+"_memo","");
+     }
+     idid2.innerHTML = "<textarea id="+sessionStorage.getItem("idou2")+"_memo>"+sessionStorage.getItem(sessionStorage.getItem("idou2")+"_memo")+"</textarea>";
+     
+     var now = new Date();
+     Year = now.getFullYear();
+     Month = Number(now.getMonth())+1;
+     Date1 = now.getDate();
+     Hour = now.getHours();
+     Min = now.getMinutes();
+     Sec = now.getSeconds();
+     console.log("Year="+Year);
+     //sessionStrage.setItem("Year",Year);
+ }
+
+ idouList = function(){
+     sessionStorage.setItem(sessionStorage.getItem("idou2")+"_memo",document.getElementById(sessionStorage.getItem("idou2")+"_memo").value);
+     location.href='HTMLPage2.html'
+  }
+
+/*var now = new Date();
+ //LoadProc= function(){ //時間使えなくなっちゃった…何でか分からない…
+   var target = document.getElementById("DateTimeDisp");
+   Year = now.getFullYear();
+   Month = Number(now.getMonth())+1;
+   Date1 = now.getDate();
+   Hour = now.getHours();
+   Min = now.getMinutes();
+   Sec = now.getSeconds();
+   //console.log("Year="+Year);
+
+      //target.innerHTML = Year + "年" + Month + "月" + Date1 + "日" + Hour + ":" + Min + ":" + Sec;
+      //name = Year + '_' + Month + '_' + Date1
+}*/
+
+save.addEventListener("click",function(){ // 保存ボタンを押したら
+//let now = new Date();
+/*function LoadProc() { //時間使えなくなっちゃった…何でか分からない…
+   var target = document.getElementById("DateTimeDisp");
+   Year = now.getFullYear();
+   Month = Number(now.getMonth())+1;
+   Date1 = now.getDate();
+   Hour = now.getHours();
+   Min = now.getMinutes();
+   Sec = now.getSeconds();
+
+      //target.innerHTML = Year + "年" + Month + "月" + Date1 + "日" + Hour + ":" + Min + ":" + Sec;
+      //name = Year + '_' + Month + '_' + Date1
+}*/
+var now = new Date();
+ //LoadProc= function(){ //時間使えなくなっちゃった…何でか分からない…
+   var target = document.getElementById("DateTimeDisp");
+   Year = now.getFullYear();
+   Month = Number(now.getMonth())+1;
+   Date1 = now.getDate();
+   Hour = now.getHours();
+   Min = now.getMinutes();
+   Sec = now.getSeconds();
+   //console.log("Year="+Year);
+
+      //target.innerHTML = Year + "年" + Month + "月" + Date1 + "日" + Hour + ":" + Min + ":" + Sec;
+      //name = Year + '_' + Month + '_' + Date1
+//}
+
+  var text = document.getElementById(sessionStorage.getItem("idou2")+"_memo").value  //"あいうえおかきくけこ～"//textarea.value // テキストエリアのテキスト
+  //let text2 = (sessionStorage.getItem("idou2")+"_memo").value
+  let blob = new Blob([text], {type:"text/plain"})
+  let a = document.createElement("a") // ダウンロード用のリンク作成
+  //let hozon = document.createElement("textarea");
+  let parentt = document.getElementById("idid2");
+  console.log("text="+text);
+  console.log("Date="+now);
+  console.log("Year="+Year);
+
+    String(Year);
+    String(Month);
+    String(Date1);
+    String(Hour);
+    String(Min);
+    String(Sec);
+    console.log("Year2="+Year);
+    //name = Year + "_" + Month + "_" + Date1
+  a.href = window.URL.createObjectURL(blob)
+  a.download = Year+'_'+Month+'_'+Date1+'_'+Hour+'_'+Min+'_'+Sec+'.txt' // 保存するファイル名
+  //a.download = now+".txt" //最悪これで行こう……
+  parentt.appendChild(a) // リンクをDOMに追加
+  a.click() // ダウンロードリンクをクリック
+  //session
+
+  //sessionStorage.setItem(sessionStorage.getItem("idou2"+"_memo"),text2);
+
+});
+
+load.addEventListener("change",function(){ // ファイルを参照したとき
+  let fileList = load.files // 読み込んだファイル
+  const reader = new FileReader()
+    reader.readAsText(fileList[0])
+    if(document.getElementById(sessionStorage.getItem("idou2")+"_memo").value != null){   //textareaに文字が入っているとき、ファイルの中身が出ない…
+       document.getElementById(sessionStorage.getItem("idou2")+"_memo").value  = "";
+    }
+    reader.addEventListener("load",function(){ // ファイルを展開したとき
+    //textarea.textContent = reader.result // テキストエリアに中身を入れる
+    sessionStorage.setItem(sessionStorage.getItem("idou2")+"_memo",reader.result);
+    idid2.innerHTML = "<textarea id="+sessionStorage.getItem("idou2")+"_memo>"+sessionStorage.getItem(sessionStorage.getItem("idou2")+"_memo")+"</textarea>";
+  })
+})
+
+   /*save.addEventListener("click",function(){ // 保存ボタンを押したら
+     var text = textarea2.value // テキストエリアのテキスト
+     //let text2 = (sessionStorage.getItem("idou2")+"_memo").value
+     var blob = new Blob([text], {type:"text/plain"})
+     var a = document.createElement("a") // ダウンロード用のリンク作成
+     var hozon = document.createElement("textarea");
+     //let num = sessionStorage.length()
+     console.log("text="+text);
+     //console.log("text2="+text2);
+
+     String(Year);
+     String(Month);
+     String(Date1);
+     String(Hour);
+     String(Min);
+     String(Sec);
+     console.log("Year="+Year);
+     //name = Year + "_" + Month + "_" + Date1
+     a.href = window.URL.createObjectURL(blob)
+     a.download = Year+'_'+Month+'_'+Date1+'_'+Hour+'_'+Min+'_'+Sec+'.txt' // 保存するファイル名
+     document.body.appendChild(a) // リンクをDOMに追加
+     a.click() // ダウンロードリンクをクリック
+     //session
+
+     sessionStorage.setItem(sessionStorage.getItem("idou2"+"_memo"),text);
+
+   });
+
+   
+
+   load.addEventListener("change",function(){ // ファイルを参照したとき
+     let fileList = load.files // 読み込んだファイル
+     const reader = new FileReader()
+     reader.readAsText(fileList[0])
+     /*if(textarea.value != null){   //textareaに文字が入っているとき、ファイルの中身が出ない…
+        textarea.textContent = "";
+     }
+
+     reader.addEventListener("load",function(){ // ファイルを展開したとき
+        textarea2.textContent = reader.result // テキストエリアに中身を入れる
+     })
+   })
+
+   idouList = function(){
+         sessionStorage.setItem(sessionStorage.getItem("idou2")+"_memo",textarea2.value);
+         location.href='HTMLPage2.html'
+   }*/
+  </script>
+
+</body>
+</html>

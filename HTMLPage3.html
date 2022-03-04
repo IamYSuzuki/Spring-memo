@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+
+<html lang="jp" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>春課題　メモ整理ソフト</title>
+    <link rel="stylesheet" href="StyleSheet3.css">
+</head>
+<body>
+<h2>メモ整理ソフト</h2>
+ <h3>フォルダ作成/選択のページ</h3>
+<div class="setumei">
+ <p>　新規フォルダ名を入力すると、下部↓に新規フォルダボタンが作成されます</p>
+ <p>　各フォルダボタンをクリックすると、フォルダのページに移り変わります</p>
+ <p>　フォルダを並び替えるボタンをクリックすると、フォルダが50音順に並び替わります</p>
+</div>
+ <div class="frame0">
+ <ul id="frame"></ul>
+ </div>
+ 新規フォルダ名入力：
+ <input type="text" name="namename" id = "idid" onchange="addList()">
+ <input type="button" id="ketteifol" value="作成" onclick="deleteList()">
+ <input type="button" id="narabufol" value="フォルダを並び替える" onclick="narabufolList()">
+
+ <script>
+ //var num = sessionStorage.length;
+ //グローバル変数は気を付けて！本当に！
+ window.onload = function(){
+      var num0 = sessionStorage.length;
+      //sessionStorage.removeItem("idou");
+      let parent = document.getElementById('frame');
+      //let num2 =  Number(sessionStorage.getItem("folder_num"))
+      let n = 0;
+
+      for(var i = 0;i<Number(sessionStorage.getItem("folder_num")); i++){ 
+         //let data = sessionStorage.getItem("folder"+i);
+         let li_text = document.createElement('input');
+         var br = document.createElement('br');
+         li_text.type = "button";
+       
+         li_text.id = "folder"+i;  //idもう一度設定する
+         li_text.value = sessionStorage.getItem("folder"+i); //input_value;
+
+         li_text.onclick = function(){ //onclick
+           console.log(li_text)
+           sessionStorage.setItem("idou",li_text.id);
+           console.log(sessionStorage.getItem("idou"));
+
+           while(sessionStorage.getItem("idou") != "folder"+n){
+             n++;
+           }
+
+           sessionStorage.setItem("jin",n);
+           location.href='./HTMLPage2.html'
+         }  
+         
+         parent.appendChild(li_text);
+         parent.appendChild(br);
+      }
+ }
+                       
+
+ function addList() { //フォルダ作成
+  let input_area = document.getElementById('idid');
+  let input_value = input_area.value;
+  let li_text = document.createElement('input');
+  let num = sessionStorage.length;
+  let br = document.createElement('br');
+  let num2 =  Number(sessionStorage.getItem("folder_num"))
+
+  if(num2 == undefined){
+        num2 = 0;
+  }
+  
+  console.log(num);
+  li_text.type = "button";
+  if(num2 == 0){
+   li_text.id = "folder0";
+  }else{
+   li_text.id = "folder"+num2;
+   console.log("in else "+num2);
+  }
+  //li_text.id = "folder"+num;
+  li_text.value = input_value;
+
+  li_text.onclick = function(){ //onclick
+        console.log(li_text)
+        sessionStorage.setItem("idou",li_text.id);
+        console.log(sessionStorage.getItem("idou"));
+        let n = 0;
+        while(sessionStorage.getItem("idou") != "folder"+n){
+            n++;
+        }
+        sessionStorage.setItem("jin",n);
+        location.href='./HTMLPage2.html'
+  }
+
+  sessionStorage.setItem(li_text.id,input_value); //folder数字 がkey
+  var data = sessionStorage.getItem(li_text.id);
+  console.log(data);
+  for(var k=0;k<num;k++){
+        let data2 = sessionStorage.key(k);
+        console.log("in session="+data2);
+  }
+  
+  console.log("id="+li_text.id);
+  console.log("num="+num);
+  
+  let parent = document.getElementById('frame');
+  parent.appendChild(li_text);
+  parent.appendChild(br);
+
+  sessionStorage.setItem("folder_num",num2+1);
+ 
+  input_area.value = '';
+  //parent.appedChild(br);
+}
+
+function deleteList() {
+  var parent = document.getElementById('frame');
+  //parent.innerHTML = '';
+}
+
+function narabufolList(){
+    let nagasa =  Number(sessionStorage.getItem("folder_num"));
+    var a0 = [];
+    var a00 = [];
+    //let 
+    frame.innerHTML = "";
+    for(let i=0;i<nagasa;i++){
+        a0[i] = sessionStorage.getItem("folder"+i);
+        console.log("hairetu="+a0[i]);
+    }
+    a0.sort();
+    console.log("sort="+a0);
+
+    for(let k=0;k<a0.length;k++){
+        for(let m=0;m<nagasa;m++){
+            if(sessionStorage.getItem("folder"+m) == a0[k]){
+               a00[k] = "folder"+m;
+               console.log("a00="+a00[k]);
+               
+               let suga = document.createElement("input")
+
+               let br = document.createElement('br');
+
+                suga.type = "button";
+                suga.id = "folder"+m;
+                suga.value = sessionStorage.getItem("folder"+m);
+
+                suga.onclick = function(){   //onclick
+                  console.log(suga)
+                  sessionStorage.setItem("idou",suga.id);
+                  console.log(sessionStorage.getItem("idou"));
+                  let n = 0;
+                  while(sessionStorage.getItem("idou") != "folder"+n){
+                    n++;
+                  }
+                 sessionStorage.setItem("jin",n);
+                 location.href='./HTMLPage2.html'
+               }
+
+                let pparent = document.getElementById("frame");
+                pparent.appendChild(suga);
+                pparent.appendChild(br);
+            }
+        }
+    }    
+}
+</script>
+ </br>
+ </br>
+ <div id="page1">
+ </div> 
+</br>
+</body>
+
+</html>
